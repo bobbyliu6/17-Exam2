@@ -281,6 +281,9 @@ class Triangle(object):
         # -------------------------------------------------------------------------
 
     def get_largest_area(self):
+        if self.bigger_triangle(self)==True:
+            return self.area()
+        return self.area()
 
 
         """
@@ -297,7 +300,7 @@ class Triangle(object):
           :rtype: Float:
         """
         # ---------------------------------------------------------------------
-        # TODO: 9
+        # DONE: 9
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
