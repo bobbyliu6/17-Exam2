@@ -3,8 +3,8 @@ Exam 2, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Weizhou Liu.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import time
@@ -13,7 +13,7 @@ import testing_helper
 
 
 ###############################################################################
-# TODO: 2.  READ the   Point   class defined below.
+# DONE: 2.  READ the   Point   class defined below.
 #  Note especially its methods:
 #    clone
 #    distance_from
@@ -87,12 +87,12 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_init()
-    # run_test_area()
-    # run_test_bigger_triangle()
-    # run_test_shrink_or_expand()
-    # run_test_return_doubled_triangle()
-    # run_test_get_largest_area()
+    #run_test_init()
+    #run_test_area()
+    #run_test_bigger_triangle()
+    #run_test_shrink_or_expand()
+    #run_test_return_doubled_triangle()
+    run_test_get_largest_area()
 
 
 ###############################################################################
@@ -102,6 +102,11 @@ class Triangle(object):
     """ Represents a triangle in 2-dimensional space. """
 
     def __init__(self, a, b, c):
+        self.a=a.clone()
+        self.b=b.clone()
+        self.c=c.clone()
+        self.time=0
+
         """
         What comes in:
           -- self and three Point objects
@@ -138,7 +143,7 @@ class Triangle(object):
           :type c: Point
         """
         # ---------------------------------------------------------------------
-        # TODO: 2.
+        # DONE: 2.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -148,6 +153,12 @@ class Triangle(object):
         # ---------------------------------------------------------------------
 
     def area(self):
+        s1=self.a.distance_from(self.b)
+        s2=self.b.distance_from(self.c)
+        s3=self.c.distance_from(self.a)
+        s=(s1+s2+s3)/2
+        Area=math.sqrt(s*(s-s1)*(s-s2)*(s-s3))
+        return Area
         """
         What comes in:
           -- self
@@ -178,7 +189,7 @@ class Triangle(object):
           :rtype: float
         """
         # ---------------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   a. READ the above specification, including the Example AND HINT!
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -188,6 +199,10 @@ class Triangle(object):
         # ---------------------------------------------------------------------
 
     def bigger_triangle(self, triangle2):
+        if self.area()>triangle2.area():
+            return True
+        else:
+            return False
         """
         What comes in:
           -- self
@@ -201,7 +216,7 @@ class Triangle(object):
           :rtype: bool
         """
         # ---------------------------------------------------------------------
-        # TODO 4:
+        # DONE 4:
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -211,8 +226,15 @@ class Triangle(object):
         # ---------------------------------------------------------------------
 
     def shrink_or_expand(self, f):
+        self.a.x=self.a.x*f
+        self.a.y=self.a.y*f
+        self.b.x = self.b.x * f
+        self.b.y = self.b.y * f
+        self.c.x = self.c.x * f
+        self.c.y = self.c.y * f
+        self.time=self.time+1
         """
-         What comes in:
+         What comes in
            -- self
            -- a positive number f
          What goes out: Nothing.
@@ -224,7 +246,7 @@ class Triangle(object):
            :type: f: float
         """
         # ---------------------------------------------------------------------
-        # TODO 8:
+        # DONE 8:
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -234,6 +256,8 @@ class Triangle(object):
         # ---------------------------------------------------------------------
 
     def return_doubled_triangle(self):
+        self.shrink_or_expand(2)
+        return self
         """
         What comes in:
           -- self
@@ -247,7 +271,7 @@ class Triangle(object):
           :rtype: Triangle:
         """
         # -------------------------------------------------------------------------
-        # TODO: 9
+        # DONE: 9
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -257,6 +281,8 @@ class Triangle(object):
         # -------------------------------------------------------------------------
 
     def get_largest_area(self):
+
+
         """
         What comes in:
           -- self
